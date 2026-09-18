@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "DEĞİŞTİR_BUNU_com.senin.jaribulamaarifa",
+      "sha256_cert_fingerprints": [
+        "DEĞİŞTİR_BUNU_PWABUILDER_SANA_VERECEK_FINGERPRINT"
+      ]
+    }
+  }
+]
