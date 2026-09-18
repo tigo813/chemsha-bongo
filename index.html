@@ -16,7 +16,7 @@
 </script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Jaribu la Maarifa</title>
+<title>Chemsha Bongo</title>
 <style>
   :root{
     --border-blue:#1e4fd6;
@@ -744,7 +744,7 @@
     </div>
     <div class="main-menu-card" id="main-menu-screen">
       <div class="menu-icon">🏆</div>
-      <div class="menu-title">Jaribu la Maarifa</div>
+      <div class="menu-title">Chemsha Bongo</div>
       <div class="menu-subtitle">Jaribu maarifa yako, jibu maswali, shinda!</div>
       <div class="best-score-badge">⭐ Rekodi bora: <span id="best-score-display">0</span></div>
       <div class="menu-start-btn" id="menu-start-btn">▶️ Anza Mchezo</div>
@@ -37173,7 +37173,7 @@
   // ===== SHIRIKI ALAMA (Score Sharing) =====
   document.getElementById("share-score-btn").addEventListener("click", async () => {
     playClick();
-    const shareText = `Nimepata alama ${score} kwenye mchezo wa Jaribu la Maarifa! 🏆 Je, unaweza kunizidi? 🤔`;
+    const shareText = `Nimepata alama ${score} kwenye mchezo wa Chemsha Bongo! 🏆 Je, unaweza kunizidi? 🤔`;
     if(navigator.share){
       try {
         await navigator.share({ text: shareText });
