@@ -5,15 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0a1a5c">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
-<script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("sw.js").catch(() => {});
-    });
-  }
-</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Chemsha Bongo</title>
@@ -296,12 +287,18 @@
     font-size:20px;
     font-weight:700;
     cursor:pointer;
-    box-shadow:0 5px 0 rgba(0,0,0,0.25);
-    transition:transform .08s ease, background .25s ease, border-color .25s ease;
+    box-shadow:0 6px 0 rgba(0,0,0,0.3), 0 8px 14px rgba(0,0,0,0.25);
+    transition:transform .12s ease, background .25s ease, border-color .25s ease, box-shadow .12s ease;
     text-align:left;
     position:relative;
+    transform-style:preserve-3d;
+    perspective:600px;
   }
-  .answer-btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,0.25);filter:brightness(1.1);}
+  .answer-btn:active{
+    transform:translateY(4px) rotateX(6deg) scale(0.985);
+    box-shadow:0 2px 0 rgba(0,0,0,0.3), 0 3px 6px rgba(0,0,0,0.2);
+    filter:brightness(1.1);
+  }
   .answer-btn .letter{
     color:var(--yellow-letter);
     font-weight:900;
@@ -309,6 +306,12 @@
   .answer-btn.correct{
     background:linear-gradient(180deg,#3fae5a,#1e7a37);
     border-color:#7adf94;
+    animation:correct-pop-3d 0.5s ease;
+  }
+  @keyframes correct-pop-3d{
+    0%{transform:scale(1) rotateY(0deg);}
+    35%{transform:scale(1.06) rotateY(8deg) translateZ(10px);box-shadow:0 10px 20px rgba(0,0,0,0.35);}
+    100%{transform:scale(1) rotateY(0deg);}
   }
   @keyframes suspense-pulse{
     0%,100%{box-shadow:0 5px 0 rgba(0,0,0,0.25), 0 0 0 0 rgba(255,214,77,0.7);border-color:#ffd64d;}
@@ -334,11 +337,15 @@
     animation:screen-fade-in 0.35s ease-out;
   }
   @keyframes question-fade-in{
-    0%{opacity:0;transform:translateY(8px) scale(0.98);}
-    100%{opacity:1;transform:translateY(0) scale(1);}
+    0%{opacity:0;transform:translateY(8px) scale(0.98) rotateX(-8deg);}
+    100%{opacity:1;transform:translateY(0) scale(1) rotateX(0deg);}
+  }
+  .question-card{
+    perspective:900px;
   }
   .question-card.fade-in{
-    animation:question-fade-in 0.35s ease-out;
+    animation:question-fade-in 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+    transform-style:preserve-3d;
   }
   @keyframes lives-pulse{
     0%{transform:scale(1);color:inherit;}
@@ -35609,6 +35616,146 @@
       q: "👩‍🏫 Mtu anayefundisha watoto shuleni ni nini/nani?",
       options: ["Alfajiri", "Taa", "Mwalimu", "Mpira"],
       correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mnyama mwenye ganda gumu, anayeenda polepole ni nini?",
+      options: ["Kobe", "Sabuni ya Kuogea", "Chupi", "Chungu"],
+      correct: 0
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mnyama mdogo anayefanya kazi kwa bidii na kuishi kundi ni nini?",
+      options: ["Kijani", "Dawati", "Chungu", "Kobe"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Ndege mwenye shingo ndefu anayeishi majini, mweupe ni nini?",
+      options: ["Kobe", "Mbuzi", "Sabuni ya Kuogea", "Bata Bukini"],
+      correct: 3
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mnyama mwenye pembe mbili, anayefugwa kwa maziwa na nyama ni nini?",
+      options: ["Sega", "Mbuzi", "Chupi", "Kijani"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Chombo unachopiga ili kutoa sauti ya muziki, kina ngozi ni nini?",
+      options: ["Kobe", "Chungu", "Ngoma", "Nyekundu"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Kitu unachotumia kuoga mwili ni nini?",
+      options: ["Sabuni ya Kuogea", "Dawati", "Nyekundu", "Sega"],
+      correct: 0
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Nguo unayovaa mwilini kabla ya nguo za nje ni nini?",
+      options: ["Kijani", "Sega", "Nyeupe", "Chupi"],
+      correct: 3
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Kifaa unachotumia kusafisha nywele ni nini?",
+      options: ["Nyeupe", "Sega", "Kijani", "Kobe"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mahali unapoketi ukisoma darasani ni nini?",
+      options: ["Mbuzi", "Dawati", "Chupi", "Kobe"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Rangi ya mti/majani ya mimea ni nini?",
+      options: ["Kobe", "Kijani", "Nyeupe", "Bata Bukini"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Rangi ya damu ni nini?",
+      options: ["Dawati", "Nyekundu", "Ngoma", "Sabuni ya Kuogea"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Rangi ya maziwa ni nini?",
+      options: ["Kijani", "Bata Bukini", "Sabuni ya Kuogea", "Nyeupe"],
+      correct: 3
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mchezo unaocheza ukirusha na kudaka mpira mmoja kwa mmoja ni nini?",
+      options: ["Jumamosi/Jumapili", "Gari", "Kudaka Mpira", "Sufuria"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Kitu unachotumia kuandika kwenye ubao mweupe ni nini?",
+      options: ["Sinki", "Sufuria", "Kalamu ya Ubaoni", "Kudaka Mpira"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Chombo unachotumia kupika ugali/wali juu ya moto ni nini?",
+      options: ["Kalamu ya Ubaoni", "Masika", "Uwanja wa Michezo", "Sufuria"],
+      correct: 3
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mahali unapoosha vyombo jikoni ni nini?",
+      options: ["Uwanja wa Michezo", "Sinki", "Jumamosi/Jumapili", "Sufuria"],
+      correct: 1
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Kitu chenye magurudumu manne unachovyoendesha barabarani ni nini?",
+      options: ["Jumamosi/Jumapili", "Kudaka Mpira", "Gari", "Sufuria"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Mahali watoto huchezea nje na kutumia bembea/slaidi ni nini?",
+      options: ["Sinki", "Kalamu ya Ubaoni", "Uwanja wa Michezo", "Masika"],
+      correct: 2
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Siku ambayo watoto hawaendi shuleni, mwishoni mwa wiki ni nini?",
+      options: ["Sinki", "Kudaka Mpira", "Gari", "Jumamosi/Jumapili"],
+      correct: 3
+    },
+    {
+      difficulty: "easy",
+      audience: "watoto",
+      q: "Msimu wa mwaka wenye mvua nyingi ni nini?",
+      options: ["Kalamu ya Ubaoni", "Sufuria", "Sinki", "Masika"],
+      correct: 3
     }
   ];
 
@@ -36498,6 +36645,20 @@
       const easy = smartOrder(easyAll.filter(q => q.audience !== "watoto"));
       questionQueue = [...easy, ...medium, ...hard];
     }
+    // AKIL 10: ARDIŞIK TEKRAR ÖNLEYİCİ - "Doğru İfadeyi Bul" gibi sabit soru metnine
+    // sahip türler, farklı kategorilerden gelse de yan yana gelince "aynı soru" hissi
+    // veriyordu. Bu adım, aynı q.q metnine sahip iki soru yan yana kalmasın diye
+    // onları biraz ileriden farklı bir soruyla değiştiriyor.
+    for(let i = 1; i < questionQueue.length; i++){
+      if(questionQueue[i].q === questionQueue[i-1].q){
+        for(let j = i + 1; j < questionQueue.length; j++){
+          if(questionQueue[j].q !== questionQueue[i-1].q && questionQueue[j].q !== questionQueue[i].q){
+            [questionQueue[i], questionQueue[j]] = [questionQueue[j], questionQueue[i]];
+            break;
+          }
+        }
+      }
+    }
     sessionSeenThisGame = [];
   }
 
@@ -36715,7 +36876,7 @@
       }
       saveStats();
       statusLine.textContent = bonus > 0 ? `Sahihi! +${100+bonus} (mfululizo x${streak})` : "Sahihi! Inaendelea kwa swali linalofuata...";
-      setTimeout(nextQuestion, 1200);
+      setTimeout(nextQuestion, 2000);
     } else {
       btnEl.classList.add("wrong");
       allButtons[item.correct].classList.add("correct");
@@ -36742,7 +36903,7 @@
         }
       } else {
         statusLine.textContent = "Jibu si sahihi! Inaendelea kwa swali linalofuata...";
-        setTimeout(nextQuestion, 1200);
+        setTimeout(nextQuestion, 2000);
       }
     }
   }
