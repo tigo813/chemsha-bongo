@@ -37101,9 +37101,38 @@
     sessionSeenThisGame = [];
   }
 
+  // AKIL 12: HER SORUDA FARKLI (ama okunabilirliği garanti edilmiş) RENK PALETİ
+  // Her palet, mevcut "açık pastel zemin + koyu okunaklı yazı" kontrast kuralını
+  // takip ediyor - WCAG standardına uygun yüksek kontrast, sadece ton değişiyor.
+  const questionCardPalettes = [
+    { bg1: "#fdf3e0", bg2: "#f5e6c8", text: "#2a2a6b" }, // Krem/Altın (orijinal)
+    { bg1: "#e8f5e9", bg2: "#c8e6c9", text: "#1b5e20" }, // Nane Yeşili
+    { bg1: "#e3f2fd", bg2: "#bbdefb", text: "#0d3b66" }, // Gökyüzü Mavisi
+    { bg1: "#ffe8dc", bg2: "#ffccb0", text: "#7a2e12" }, // Şeftali/Mercan
+    { bg1: "#f2e6fa", bg2: "#e0c3f5", text: "#4a1a6b" }, // Lavanta Moru
+    { bg1: "#fde3ec", bg2: "#f8bbd0", text: "#7a1a42" }, // Gül Pembesi
+    { bg1: "#e0f2f1", bg2: "#b2dfdb", text: "#0a4a44" }, // Deniz Yeşili-Mavi
+  ];
+  function applyRandomQuestionPalette(){
+    const card = document.querySelector(".question-card");
+    if(!card) return;
+    if(document.body.classList.contains("kids-mode")){
+      // Çocuk modu kendi rengini kullanıyor, bu paleti hiç uygulamıyoruz
+      card.style.removeProperty("--card-cream");
+      card.style.removeProperty("--card-cream-2");
+      card.style.removeProperty("--text-navy");
+      return;
+    }
+    const palette = questionCardPalettes[Math.floor(Math.random() * questionCardPalettes.length)];
+    card.style.setProperty("--card-cream", palette.bg1);
+    card.style.setProperty("--card-cream-2", palette.bg2);
+    card.style.setProperty("--text-navy", palette.text);
+  }
+
   function loadQuestion(){
     statusLine.textContent = "";
     const item = questionQueue[currentIndex];
+    applyRandomQuestionPalette();
     if(item.audience === "watoto"){
       // AKIL: Çocuklar görsele (emoji) daha çok tepki verir - baştaki emojiyi ayırıp büyütüyoruz
       const emojiMatch = item.q.match(/^((?:\p{Emoji_Presentation}|\p{Extended_Pictographic})(?:\uFE0F|\u200D(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))*)+\s*/u);
